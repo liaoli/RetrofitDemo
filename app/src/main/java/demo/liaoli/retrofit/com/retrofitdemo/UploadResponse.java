@@ -92,7 +92,7 @@ public class UploadResponse {
 
         @Override
         public String toString() {
-            return "video:"+ video +",pic :"+ pic  +",pic_w:" + pic_w +",pic_h :"+ pic_h;
+            return "video:"+ video +" ,pic :"+ pic  +" ,pic_w:" + pic_w +",pic_h :"+ pic_h;
         }
     }
 

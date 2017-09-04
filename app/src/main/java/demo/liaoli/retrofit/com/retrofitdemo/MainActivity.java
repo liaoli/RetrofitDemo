@@ -53,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
 
         // QueryMapTest();
 
-        pathtest();
+       // pathtest();
 
 
         if (isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE) && isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
-            DoubanAPIManager.uploadMultipleFiles("http://tools.livestar.com/upload/?ac=s3", "/storage/emulated/0/outputVideo1502877596964.mp4", new Callback<UploadResponse>() {
+            DoubanAPIManager.uploadMultipleFiles("http://tools.livestar.com/upload/?ac=s3", "/storage/emulated/0/outputVideo1503042374163.mp4", new Callback<UploadResponse>() {
                 @Override
                 public void onResponse(Call<UploadResponse> call, Response<UploadResponse> response) {
 

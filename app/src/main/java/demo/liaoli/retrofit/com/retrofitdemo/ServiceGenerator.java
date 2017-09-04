@@ -19,6 +19,9 @@ public class ServiceGenerator {
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient().newBuilder();
 
+    /**
+     * 请求返回log拦截器
+     */
     private static HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
 
     public static <S> S createService(Class<S> serviceClass){
