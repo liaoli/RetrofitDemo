@@ -2,6 +2,7 @@ package demo.liaoli.retrofit.com.retrofitdemo;
 
 import java.io.IOException;
 
+import boomegg.cn.wawa.proto.PhpApi;
 import okhttp3.FormBody;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -37,6 +38,8 @@ public class ServiceGenerator {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
                     Request request = chain.request();
+
+
                     if (request.body() instanceof FormBody) {
                         FormBody.Builder bodyBuilder = new FormBody.Builder();
                         FormBody formBody = (FormBody) request.body();
@@ -47,18 +50,38 @@ public class ServiceGenerator {
                         }
 
                         formBody = bodyBuilder
-                                .addEncoded("loginType", "1")
-                                .addEncoded("deviceId", "test_12345")
-                                .addEncoded("_device", "2")
-                                .addEncoded("_channel", "develop")
-                                .addEncoded("_version", "1.0")
-                                .addEncoded("_reversion", "1")
+                                .add("loginType", "1")
+                                .add("deviceId", "test_12345")
+                                .add("_device", "2")
+                                .add("_channel", "develop")
+                                .add("_version", "1.0")
+                                .add("_reversion", "1")
                                 .build();
 
                         request = request.newBuilder().post(formBody).build();
-                    }
+                    }else{
 
+                        FormBody.Builder bodyBuilder = new FormBody.Builder();
+
+                        FormBody formBody = bodyBuilder
+                                .add("loginType", "1")
+                                .add("deviceId", "test_12345")
+                                .add("_device", "2")
+                                .add("_channel", "develop")
+                                .add("_version", "1.0")
+                                .add("_reversion", "1")
+                                .build();
+
+                        request = request.newBuilder().post(formBody).build();
+
+                    }
                     Response response = chain.proceed(request);
+//
+                    byte[] bytes = response.body().bytes();
+                    String s = new String(bytes);
+
+                    PhpApi.UserInfoRsp userInfoRsp =  PhpApi.UserInfoRsp.parseFrom(bytes);
+
                     return response;
                 }
 

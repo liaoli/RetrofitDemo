@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,23 +53,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        findViewById(R.id.tv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DoubanAPIManager.test(
+                        new Callback<PhpApi.UserInfoRsp>() {
+                            @Override
+                            public void onResponse(Call<PhpApi.UserInfoRsp> call, Response<PhpApi.UserInfoRsp> response) {
+                                Object o   = response.body();
+                                Log.e(TAG, "onResponse:");
+                            }
+
+                            @Override
+                            public void onFailure(Call<PhpApi.UserInfoRsp> call, Throwable t) {
+                                Log.e(TAG, "onFailure:"+t.getMessage());
+                            }
+                        });
+
+            }
+        });
+
         // QueryMapTest();
 
         //pathtest();
 
-        DoubanAPIManager.test(
-                new Callback<PhpApi.UserInfoRsp>() {
-                    @Override
-                    public void onResponse(Call<PhpApi.UserInfoRsp> call, Response<PhpApi.UserInfoRsp> response) {
-                        Object o   = response.body();
-                        Log.e(TAG, "onResponse:");
-                    }
-
-                    @Override
-                    public void onFailure(Call<PhpApi.UserInfoRsp> call, Throwable t) {
-                        Log.e(TAG, "onFailure:"+t.getMessage());
-                    }
-                });
 
 
         if (isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE) && isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {

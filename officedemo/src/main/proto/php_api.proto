@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package boomegg.cn.wawa.proto;
+import "struct.proto";
+
+//个人中心php接口返回结构 （废弃）
+message UserCenterInfo {
+	uint32 Ret                     =  1;
+	uint32 Uid                     =  2;
+	string Name                    =  3;
+	string Pic                     =  4;
+	string Sex                     =  5;
+	uint32 Money                   =  6;
+	uint32 Level                   =  7;
+}
+
+//登录注册php接口返回结构  （废弃）
+message LoginResponse {
+    uint32 Ret   = 1;
+    string Msg     = 2;
+    string Uid   = 3;
+    string Nick = 4;
+    string Pic = 5;
+    uint32 Money  = 6;
+    bool IsRegister  = 7;
+    string Mtkey = 8;
+    string Skey = 9;
+}
+
+//登录注册返回和用户中心个人信息返回，因为数据结构基本一致
+message UserInfoRsp {
+    int32 ret = 1;
+    UserInfo ResponseItem = 2;
+    uint32 Time = 3;
+}
+
+//邮寄地址列表
+message MailList {
+    repeated MailItem mailItem = 1;
+}
+
+//地址详情
+message MailItem {
+    string Name         = 1;    //姓名
+    string phone        = 2;    //电话
+    bool   IsDefault    = 3;    //是否为默认地址
+    string ProvinceCode = 4;    //省份编码
+    string CityCode     = 5;    //城市编码
+    string AreaCode     = 6;    //区编码
+    string Address      = 7;    //详细地址
+    string AddressId    = 8;    //地址Id
+}
+
+// 邮寄地址返回结构
+message MailAddrRsp {
+    int32 ret = 1;
+    MailList ResponseItem = 2;
+    uint32 Time = 3;
+}
+
+
+

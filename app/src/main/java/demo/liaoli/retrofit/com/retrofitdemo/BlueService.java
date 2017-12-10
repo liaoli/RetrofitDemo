@@ -40,7 +40,7 @@ public interface BlueService {
                                                 @Field("tag") String tag, @Field("start") int start,
                                                 @Field("count") int count);
 
-    @POST("ali/user/ulogin/")
+    @POST("ali/user/ulogin")
     Call<PhpApi.UserInfoRsp> test();
 
     @POST()
