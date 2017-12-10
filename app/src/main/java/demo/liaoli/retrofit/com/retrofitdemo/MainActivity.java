@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import boomegg.cn.wawa.proto.PhpApi;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,26 +54,40 @@ public class MainActivity extends AppCompatActivity {
 
         // QueryMapTest();
 
-       // pathtest();
+        //pathtest();
+
+        DoubanAPIManager.test(
+                new Callback<PhpApi.UserInfoRsp>() {
+                    @Override
+                    public void onResponse(Call<PhpApi.UserInfoRsp> call, Response<PhpApi.UserInfoRsp> response) {
+                        Object o   = response.body();
+                        Log.e(TAG, "onResponse:");
+                    }
+
+                    @Override
+                    public void onFailure(Call<PhpApi.UserInfoRsp> call, Throwable t) {
+                        Log.e(TAG, "onFailure:"+t.getMessage());
+                    }
+                });
 
 
         if (isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE) && isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
-            DoubanAPIManager.uploadMultipleFiles("http://tools.livestar.com/upload/?ac=s3", "/storage/emulated/0/outputVideo1503042374163.mp4", new Callback<UploadResponse>() {
-                @Override
-                public void onResponse(Call<UploadResponse> call, Response<UploadResponse> response) {
-
-                    UploadResponse uploadResponse = response.body();
-
-                    Log.e(TAG, "response.isSuccessful() = " + response.isSuccessful() + ",response.code() = " + response.code() + "uploadResponse---> " + uploadResponse == null ? "null" : uploadResponse.toString());
-
-                }
-
-                @Override
-                public void onFailure(Call<UploadResponse> call, Throwable t) {
-                    Log.e(TAG, t.toString());
-                }
-            });
+//            DoubanAPIManager.uploadMultipleFiles("http://tools.livestar.com/upload/?ac=s3", "/storage/emulated/0/outputVideo1503042374163.mp4", new Callback<UploadResponse>() {
+//                @Override
+//                public void onResponse(Call<UploadResponse> call, Response<UploadResponse> response) {
+//
+//                    UploadResponse uploadResponse = response.body();
+//
+//                    Log.e(TAG, "response.isSuccessful() = " + response.isSuccessful() + ",response.code() = " + response.code() + "uploadResponse---> " + uploadResponse == null ? "null" : uploadResponse.toString());
+//
+//                }
+//
+//                @Override
+//                public void onFailure(Call<UploadResponse> call, Throwable t) {
+//                    Log.e(TAG, t.toString());
+//                }
+//            });
         } else {
             ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE,
                     REQUEST_EXTERNAL_STORAGE);

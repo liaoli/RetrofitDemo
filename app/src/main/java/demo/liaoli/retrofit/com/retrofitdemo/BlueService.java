@@ -2,6 +2,7 @@ package demo.liaoli.retrofit.com.retrofitdemo;
 
 import java.util.Map;
 
+import boomegg.cn.wawa.proto.PhpApi;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -38,6 +39,10 @@ public interface BlueService {
     Call<BookSearchResponse> getSearchBooksPost(@Field("q") String name,
                                                 @Field("tag") String tag, @Field("start") int start,
                                                 @Field("count") int count);
+
+    @POST("ali/user/ulogin/")
+    Call<PhpApi.UserInfoRsp> test();
+
     @POST()
     @Multipart
     Call<UploadResponse> uploadFile(@Url String url,

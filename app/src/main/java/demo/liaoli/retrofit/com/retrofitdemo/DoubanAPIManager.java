@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import boomegg.cn.wawa.proto.PhpApi;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -32,6 +33,11 @@ public class DoubanAPIManager {
 
     public static void getBookById(String id, Callback<BookSResponse> callback){
         getBlueService().getBookById(id).enqueue(callback);
+    }
+
+
+    public static void test(Callback<PhpApi.UserInfoRsp> callback){
+        getBlueService().test().enqueue(callback);
     }
 
     public static void SearchBook(String name, String tag, int start, int count, Callback<BookSearchResponse> callback){
